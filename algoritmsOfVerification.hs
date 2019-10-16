@@ -6,6 +6,7 @@ selectColuna (head:tail) colunaAtual colunaDestino caractere
   | colunaAtual + 1 < 9          = selectColuna tail (colunaAtual + 1) colunaDestino caractere
   | otherwise                    = 0
 
+-- Metodo privado!
 -- Metodo verificado! Verifica se a coluna passada como parametro, possui ou não o caractere.
 -- Retorna 1 se o caractere pode ser inserido na coluna.
 -- Retorna 0 se o caractere não pode ser inserido na coluna.
@@ -25,6 +26,7 @@ selectLinha (head:tail) linha coluna caractere
   | (verificaElementoLinha head 0 linha caractere == 0) = 0
   | otherwise                                           = selectLinha tail linha (coluna + 1) caractere
 
+-- Metodo Privado.
 -- Metodo verificado! Percorre a coluna até encontrar o elemento correspondente da linha e verificar recursivamente se o caractere pode ser inserido ou não.
 -- Retorna 1 se o caractere pode ser inserido na linha.
 -- Retorna 0 se o caractere não pode ser inserido na linha.
@@ -38,6 +40,7 @@ verificaElementoLinha (head:tail) iterator linha caractere
 selectSetor :: [[Char]] -> Int -> Int -> Char -> Int
 selectSetor matriz linha coluna caractere = verificaSetor matriz 0 ((delimitaMargem linha),(delimitaMargem coluna)) ((delimitaMargem linha) + 2,(delimitaMargem coluna) + 2) caractere
 
+-- Metodo Privado.
 -- Função responsável por selecionar as colunas que vão ser submetidas ao validador.
 -- Retorna 1 se o caractere pode ser inserido.
 -- Retorna 0 se o caractere não pode ser inserido.
@@ -49,6 +52,7 @@ verificaSetor (head:tail) iterator (linhaInicial,colunaInicial) (linhaFinal,colu
   | (colunaInicial <= colunaFinal) && (verificaSubcoluna head 0 (linhaInicial,linhaFinal) caractere == 0) = 0
   | otherwise                                                                                             = 1
 
+-- Metodo Privado.
 -- Função que verifica de fato, uma serie de subcolunas, para saber se tal caractere pode ou não ser inserido ali.
 -- Retorna 1 se o caractere pode ser inserido.
 -- Retorna 0 se o caractere não pode ser inserido.
@@ -60,6 +64,7 @@ verificaSubcoluna (head:tail) iterator (inicio,final) caractere
   | caractere /= head                           = verificaSubcoluna tail iterator (inicio + 1,final) caractere
   | otherwise = 0
 
+-- Metodo Privado.
 -- Retorna um margeamento do setor para ser verificado.
 delimitaMargem :: Int -> Int
 delimitaMargem numero
