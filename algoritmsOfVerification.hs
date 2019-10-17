@@ -1,4 +1,25 @@
 
+-- Metodo verificado! Verifica todas as três condições de inserção de um numero no sudoku.
+-- Retorna 1 se o caractere pode ser inserido.
+-- Retorna 0 se o caractere não pode ser inserido.
+verificaTotal :: [[Char]] -> Int -> Int -> Char -> Int
+verificaTotal matriz linha coluna caractere
+  | (selectColuna matriz 0 coluna caractere == 1) && (selectLinha matriz linha coluna caractere == 1) && (selectSetor matriz linha coluna caractere == 1) = 1
+  | otherwise = 0
+
+retornaNumerosInChar :: Int -> Char
+retornaNumerosInChar numero
+ | numero == 1 = '1'
+ | numero == 2 = '2'
+ | numero == 3 = '3'
+ | numero == 4 = '4'
+ | numero == 5 = '5'
+ | numero == 6 = '6'
+ | numero == 7 = '7'
+ | numero == 8 = '8'
+ | numero == 9 = '9'
+ | otherwise   = '0'
+
 -- Metodo verificado! Seleciona a coluna na matriz para verificar se o elemento pode ser inserido!
 selectColuna :: [[Char]] -> Int -> Int -> Char -> Int
 selectColuna (head:tail) colunaAtual colunaDestino caractere
