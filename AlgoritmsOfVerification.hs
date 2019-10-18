@@ -1,6 +1,6 @@
 module AlgoritmsOfVerification where
 
-  -- Metodo verificado! Verifica todas as três condições de inserção de um numero no sudoku.
+  -- Funcao verificada! Verifica todas as três condições de inserção de um numero no sudoku.
   -- Retorna 1 se o caractere pode ser inserido.
   -- Retorna 0 se o caractere não pode ser inserido.
   verificaTotal :: [[Char]] -> Int -> Int -> Char -> Int
@@ -21,15 +21,15 @@ module AlgoritmsOfVerification where
    | numero == 9 = '9'
    | otherwise   = '0'
 
-  -- Metodo verificado! Seleciona a coluna na matriz para verificar se o elemento pode ser inserido!
+  -- Funcao verificada! Seleciona a coluna na matriz para verificar se o elemento pode ser inserido!
   selectColuna :: [[Char]] -> Int -> Int -> Char -> Int
   selectColuna (head:tail) colunaAtual colunaDestino caractere
     | colunaAtual == colunaDestino = verificaColuna head 0 caractere
     | colunaAtual + 1 < 9          = selectColuna tail (colunaAtual + 1) colunaDestino caractere
     | otherwise                    = 0
 
-  -- Método Privado!
-  -- Metodo verificado! Verifica se a coluna passada como parametro, possui ou não o caractere.
+  -- Funcao Privada!
+  -- Funcao verificada! Verifica se a coluna passada como parametro, possui ou não o caractere.
   -- Retorna 1 se o caractere pode ser inserido na coluna.
   -- Retorna 0 se o caractere não pode ser inserido na coluna.
   verificaColuna :: [Char] -> Int -> Char -> Int
@@ -38,7 +38,7 @@ module AlgoritmsOfVerification where
     | head == caractere  = 0
     | otherwise          = verificaColuna tail (n + 1) caractere
 
-  -- Metodo verificado! Navega entre os colunas da matriz para verificar se o caractere passado existe na linha ou não.
+  -- Funcao Verificada! Navega entre os colunas da matriz para verificar se o caractere passado existe na linha ou não.
   -- Retorna 1 se o caractere pode ser inserido na linha.
   -- Retorna 0 se o caractere não pode ser inserido na linha.
   selectLinha :: [[Char]] -> Int -> Int -> Char -> Int
@@ -47,8 +47,8 @@ module AlgoritmsOfVerification where
     | ((verificaElementoLinha head 0 linha caractere) == 0) = 0
     | otherwise                                             = selectLinha tail linha (coluna + 1) caractere
 
-  -- Método Privado!
-  -- Metodo verificado! Percorre a coluna até encontrar o elemento correspondente da linha e verificar recursivamente se o caractere pode ser inserido ou não.
+  -- Funcao Privada!
+  -- Funcao Verificada! Percorre a coluna até encontrar o elemento correspondente da linha e verificar recursivamente se o caractere pode ser inserido ou não.
   -- Retorna 1 se o caractere pode ser inserido na linha.
   -- Retorna 0 se o caractere não pode ser inserido na linha.
   verificaElementoLinha :: [Char] -> Int -> Int -> Char -> Int
@@ -61,7 +61,7 @@ module AlgoritmsOfVerification where
   selectSetor :: [[Char]] -> Int -> Int -> Char -> Int
   selectSetor matriz linha coluna caractere = verificaSetor matriz 0 ((delimitaMargem linha),(delimitaMargem coluna)) ((delimitaMargem linha) + 2,(delimitaMargem coluna) + 2) caractere
 
-  -- Método Privado!
+  -- Funcao Privada!
   -- Função responsável por selecionar as colunas que vão ser submetidas ao validador.
   -- Retorna 1 se o caractere pode ser inserido.
   -- Retorna 0 se o caractere não pode ser inserido.
@@ -73,7 +73,7 @@ module AlgoritmsOfVerification where
     | (iterator == colunaInicial) && (colunaInicial <= colunaFinal) && (verificaSubcoluna head 0 (linhaInicial,linhaFinal) caractere == 0) = 0
     | (colunaInicial > colunaFinal)                                                                                                        = 1
 
-  -- Método Privado!
+  -- Funcao Privada!
   -- Função que verifica de fato, uma serie de subcolunas, para saber se tal caractere pode ou não ser inserido ali.
   -- Retorna 1 se o caractere pode ser inserido.
   -- Retorna 0 se o caractere não pode ser inserido.
@@ -85,7 +85,7 @@ module AlgoritmsOfVerification where
     | (iterator == inicio) && (caractere /= head)  = verificaSubcoluna tail (iterator + 1) (inicio + 1,final) caractere
     | otherwise = 0
 
-  -- Método Privado!
+  -- Funcao Privada!
   -- Retorna um margeamento do setor para ser verificado.
   delimitaMargem :: Int -> Int
   delimitaMargem numero

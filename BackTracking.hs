@@ -1,7 +1,7 @@
-
 module BackTracking where
 
   import MethodsAuxiliars
+  import AuxiliaryFunctions
   import AlgoritmsOfVerification
 
   testBackTracking :: [[Char]] -> IO()
@@ -26,7 +26,7 @@ module BackTracking where
     | (linha + 1 == 9) = (0,coluna + 1)
     | otherwise        = (linha + 1,coluna)
 
-  -- Metodo para testar a insercao. Não usar!
+  -- Funcao para testar a insercao. Não usar!
   testAdiciona :: [[Char]] -> (Int,Int) -> Char -> IO()
   testAdiciona matriz (linha,coluna) caractere = mostrarSudoku(adicionaElementoPosicao matriz (0,0) (linha,coluna) caractere)
 
@@ -37,7 +37,7 @@ module BackTracking where
     | colunaAtual < coluna = [head] ++ (adicionaElementoPosicao tail (linhaAtual,colunaAtual + 1) (linha,coluna) caractere)
     | otherwise            = [(adicionaNaColuna head (linhaAtual,linha) caractere)] ++ tail
 
-  -- Metodo Privado!
+  -- Funcao Privada!
   adicionaNaColuna :: [Char] -> (Int,Int) -> Char -> [Char]
   adicionaNaColuna [] (linhaAtual,linha) caractere = []
   adicionaNaColuna (head:tail) (linhaAtual,linha) caractere
