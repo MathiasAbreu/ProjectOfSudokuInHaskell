@@ -5,7 +5,7 @@ module AlgoritmsOfVerification where
   -- Retorna 0 se o caractere não pode ser inserido.
   verificaTotal :: [[Char]] -> Int -> Int -> Char -> Int
   verificaTotal matriz linha coluna caractere
-    | (selectColuna matriz 0 coluna caractere == 1) && (selectLinha matriz linha coluna caractere == 1) && (selectSetor matriz linha coluna caractere == 1) = 1
+    | (selectColuna matriz 0 coluna caractere == 1) && (selectLinha matriz linha 0 caractere == 1) && (selectSetor matriz linha coluna caractere == 1) = 1
     | otherwise = 0
 
   retornaNumerosInChar :: Int -> Char
@@ -42,9 +42,9 @@ module AlgoritmsOfVerification where
   -- Retorna 1 se o caractere pode ser inserido na linha.
   -- Retorna 0 se o caractere não pode ser inserido na linha.
   selectLinha :: [[Char]] -> Int -> Int -> Char -> Int
-  selectLinha matriz linha 9 caractere                      = 1
+  selectLinha (head:[]) linha 8 caractere                   = verificaElementoLinha head 0 linha caractere
   selectLinha (head:tail) linha coluna caractere
-    | (coluna + 1) > 9                                      = 1
+    | coluna > 8                                            = 1
     | ((verificaElementoLinha head 0 linha caractere) == 0) = 0
     | ((verificaElementoLinha head 0 linha caractere) == 1) = selectLinha tail linha (coluna + 1) caractere
 

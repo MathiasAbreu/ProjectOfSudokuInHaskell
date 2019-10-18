@@ -11,8 +11,8 @@ module BackTracking where
   backTrackingResolution matriz (n,9) numero          = (1,matriz)
   backTrackingResolution matriz (linha,coluna) numero = if ((retornaElemento matriz (0,0) (linha,coluna)) == ' ')
     then if ((verificaTotal matriz linha coluna (retornaNumerosInChar numero)) == 1)
-      then (backTrackingResolution (adicionaElementoPosicao matriz (0,0) (linha,coluna) (retornaNumerosInChar numero)) (proximaPosicao (linha,coluna)) 1) --matriz (linha,coluna) numero
-      else backTrackingResolution matriz (linha,coluna) (numero + 1) -- matriz (linha,coluna) numero
+      then verificaSudoku(backTrackingResolution (adicionaElementoPosicao matriz (0,0) (linha,coluna) (retornaNumerosInChar numero)) (proximaPosicao (linha,coluna)) 1) matriz (linha,coluna) numero
+      else (backTrackingResolution matriz (linha,coluna) (numero + 1)) --matriz (linha,coluna) numero
     else backTrackingResolution matriz (proximaPosicao (linha,coluna)) 1
 
   -- Essa função funciona como restart.
