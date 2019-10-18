@@ -2,6 +2,7 @@ module Main where
   import System.IO
   import Generator
   import AuxiliaryFunctions
+  import AlgoritmsOfVerification
 
   main :: IO()
   main = do
@@ -59,15 +60,23 @@ module Main where
                               printaMenu
                              }
 
-  escolheCoordenadas :: IO()
-  escolheCoordenadas = do {putStrLn "Escolha a linha (0 para desistir):";
-                           linha <- getLine;
-                           putStrLn "Escolha a coluna(0 para desistir):";
-                           coluna <- getLine;
-                           verificaDesistencia linha coluna
-                          }
+  escolheCoordenadas :: [[Char]] -> IO()
+  escolheCoordenadas matriz = do {putStr "Escolha a linha (0 para desistir):";
 
-  verificaDesistencia :: String -> String -> IO()
-  verificaDesistencia "0" _ = putStrLn "aqui chama o resolvedor"
-  verificaDesistencia _ "0" = putStrLn "aqui chama o resolvedor"
-  verificaDesistencia x y = putStrLn "chama adicionaElementoPosicao"
+              mostrarSudoku matriz
+              linha <- read(getLine);
+              putStr "Escolha a coluna (0 para desistir):";
+              coluna <- read(getLine);
+              putStr "Insira o numero: "
+              numero <- read(getLine);
+              matrizNova <- escolheCoordenadas (verificaDesistencia matriz linha coluna (retornaNumerosInChar numero))
+
+              if (fst(matrizNova) == 1)
+                then putStr "Sudoku concluido!"
+                else escolheCoordenadas snd(matrizNova)
+    }
+
+  verificaDesistencia :: [[Char]] Int -> Int -> (Int,[[Char]])
+  verificaDesistencia matriz "0" _ = putStrLn "aqui chama o resolvedor"
+  verificaDesistencia matriz _ "0" = putStrLn "aqui chama o resolvedor"
+  verificaDesistencia x y = (0,adicionaElementoPosicao matriz (0,0) (x,y))
