@@ -62,18 +62,22 @@ module Main where
     putStr "Insira o numero: "
     numero <- readLn :: IO Int
 
-
-    if (verificaTotalModific matriz linha coluna (retornaNumerosInChar numero) == 1 )
+    if (linha == -1 && coluna == -1)
       then do
-        let (inteiro,matrizNova) = verificaDesistencia matriz linha coluna (retornaNumerosInChar numero)
-        if (inteiro == 1)
-          then do
-            mostrarSudoku matrizNova
-            putStr "Sudoku concluido!"
-          else escolheCoordenadas matrizNova
+        let (inteiro,matrizNova) = verificaDesistencia matriz 0 0 (retornaNumerosInChar numero)
+        mostrarSudoku matrizNova
       else do
-        putStrLn "Não foi possível adicionar esse número"
-        escolheCoordenadas matriz
+        if (verificaTotalModific matriz linha coluna (retornaNumerosInChar numero) == 1 )
+          then do
+            let (inteiro,matrizNova) = verificaDesistencia matriz linha coluna (retornaNumerosInChar numero)
+            if (inteiro == 1)
+              then do
+                mostrarSudoku matrizNova
+                putStr "Sudoku concluido!"
+                else escolheCoordenadas matrizNova
+          else do
+            putStrLn "Não foi possível adicionar esse número"
+            escolheCoordenadas matriz
 
   verificaDesistencia :: [[Char]] -> Int -> Int -> Char -> (Int,[[Char]])
   verificaDesistencia matriz 0 0 z = backTrackingResolution matriz (0,0) 1
