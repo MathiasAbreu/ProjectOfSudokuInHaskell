@@ -54,29 +54,27 @@ module Main where
   escolheCoordenadas matriz = do
     mostrarSudoku matriz
     putStr "Escolha a linha (0 para desistir):"
-    l <- readLn :: IO Int
-    let linha = l - 1
+    linha <- readLn :: IO Int
     putStr "Escolha a coluna (0 para desistir):"
-    c <- readLn :: IO Int
-    let coluna = c - 1
+    coluna <- readLn :: IO Int
     putStr "Insira o numero: "
     numero <- readLn :: IO Int
 
-    if (linha == -1 && coluna == -1)
+    if (linha == 0 && coluna == 0)
       then do
         let (inteiro,matrizNova) = verificaDesistencia matriz 0 0 (retornaNumerosInChar numero)
         mostrarSudoku matrizNova
       else do
-        if (verificaTotalModific matriz linha coluna (retornaNumerosInChar numero) == 1 )
+        if ((verificaTotalModific matriz (linha - 1) (coluna - 1) (retornaNumerosInChar numero)) == 1)
           then do
-            let (inteiro,matrizNova) = verificaDesistencia matriz linha coluna (retornaNumerosInChar numero)
+            let (inteiro,matrizNova) = verificaDesistencia matriz (linha - 1) (coluna - 1) (retornaNumerosInChar numero)
             if (inteiro == 1)
               then do
                 mostrarSudoku matrizNova
-                putStr "Sudoku concluido!"
-                else escolheCoordenadas matrizNova
+                putStrLn "Sudoku concluido!"
+              else escolheCoordenadas matrizNova
           else do
-            putStrLn "Não foi possível adicionar esse número"
+            putStrLn "Não foi possível adicionar esse número!"
             escolheCoordenadas matriz
 
   verificaDesistencia :: [[Char]] -> Int -> Int -> Char -> (Int,[[Char]])
