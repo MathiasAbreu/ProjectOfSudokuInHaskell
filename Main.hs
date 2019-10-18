@@ -26,15 +26,19 @@ module Main where
     escolherOpcaoMenu opcao
 
   escolherOpcaoMenu :: String -> IO()
-  escolherOpcaoMenu "1" = do {putStrLn "Escolha uma dificuldade:";
+  escolherOpcaoMenu "1" = do {putStrLn "";
+                              putStrLn "Escolha uma dificuldade:";
                               putStrLn "1. Facil";
                               putStrLn "2. Medio";
                               putStrLn "3. Dificil";
                               opcao <- getLine;
+                              putStrLn "";
                               escolherDificuldade opcao}
-  escolherOpcaoMenu "3" = putStrLn "AQUI JA CHAMA O METODO QUE VAI CRIANDO O SUDOKU"
+  escolherOpcaoMenu "2" = putStrLn "AQUI CHAMA O METODO QUE INSERE MANUALMENTE"
+  escolherOpcaoMenu "3" = putStrLn "AQUI JA CHAMA O METODO QUE VAI RESOLVENDO O SUDOKU"
   escolherOpcaoMenu "4" = return ()
-  escolherOpcaoMenu _ = do {putStrLn "Opçao invalida, tente novamente!";
+  escolherOpcaoMenu _ = do {putStrLn "";
+                            putStrLn "Opçao invalida, tente novamente!";
                             printaMenu}
 
   escolherDificuldade :: String -> IO()
