@@ -33,19 +33,41 @@ module Main where
                               putStrLn "3. Dificil";
                               opcao <- getLine;
                               putStrLn "";
-                              escolherDificuldade opcao}
+                              escolherDificuldade opcao
+                              }
   escolherOpcaoMenu "2" = putStrLn "AQUI CHAMA O METODO QUE INSERE MANUALMENTE"
   escolherOpcaoMenu "3" = putStrLn "AQUI JA CHAMA O METODO QUE VAI RESOLVENDO O SUDOKU"
   escolherOpcaoMenu "4" = return ()
   escolherOpcaoMenu _ = do {putStrLn "";
                             putStrLn "Opçao invalida, tente novamente!";
-                            printaMenu}
+                            printaMenu
+                           }
 
   escolherDificuldade :: String -> IO()
   sudoku = [[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' ']]
   gerado = gerador sudoku 0 0 100
-  escolherDificuldade "1" = mostrarSudoku (gerador sudoku 0 0 300)
-  escolherDificuldade "2" = mostrarSudoku (gerador sudoku 0 0 200)
-  escolherDificuldade "3" = mostrarSudoku (gerador sudoku 0 0 100)
+  escolherDificuldade "1" = do {mostrarSudoku (gerador sudoku 0 0 300);
+                                escolheCoordenadas
+                               }
+  escolherDificuldade "2" = do {mostrarSudoku (gerador sudoku 0 0 200);
+                                escolheCoordenadas
+                               }
+  escolherDificuldade "3" = do {mostrarSudoku (gerador sudoku 0 0 100);
+                                escolheCoordenadas
+                               }
   escolherDificuldade _ = do {putStrLn "Opçao invalida, tente novamente!";
-                              printaMenu}
+                              printaMenu
+                             }
+
+  escolheCoordenadas :: IO()
+  escolheCoordenadas = do {putStrLn "Escolha a linha (0 para desistir):";
+                           linha <- getLine;
+                           putStrLn "Escolha a coluna(0 para desistir):";
+                           coluna <- getLine;
+                           verificaDesistencia linha coluna
+                          }
+
+  verificaDesistencia :: String -> String -> IO()
+  verificaDesistencia "0" _ = putStrLn "aqui chama o resolvedor"
+  verificaDesistencia _ "0" = putStrLn "aqui chama o resolvedor"
+  verificaDesistencia x y = putStrLn "chama adicionaElementoPosicao"
