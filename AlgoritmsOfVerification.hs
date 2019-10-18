@@ -5,7 +5,7 @@ module AlgoritmsOfVerification where
   -- Retorna 0 se o caractere não pode ser inserido.
   verificaTotal :: [[Char]] -> Int -> Int -> Char -> Int
   verificaTotal matriz linha coluna caractere
-    | (selectColuna matriz 0 coluna caractere == 1) && (selectLinha matriz linha coluna caractere == 1) && (selectSetor matriz linha coluna caractere == 1) = 1
+    | (selectColuna matriz 0 coluna caractere == 1) && (selectLinha matriz linha 0 caractere == 1) && (selectSetor matriz linha coluna caractere == 1) = 1
     | otherwise = 0
 
   retornaNumerosInChar :: Int -> Char

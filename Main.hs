@@ -39,9 +39,9 @@ module Main where
 
   escolherDificuldade :: String -> IO()
   sudoku = [[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' '],[' ',' ',' ',' ',' ',' ',' ',' ',' ']]
-  gerado = gerador sudoku 0 0
-  escolherDificuldade "1" = mostrarSudoku gerado
-  escolherDificuldade "2" = putStrLn "AQUI CHAMA O METODO QUE CRIA O JOGO MEDIO"
-  escolherDificuldade "3" = putStrLn "AQUI CHAMA O METODO QUE CRIA O JOGO DIFICIL"
+  gerado = gerador sudoku 0 0 100
+  escolherDificuldade "1" = mostrarSudoku (gerador sudoku 0 0 300)
+  escolherDificuldade "2" = mostrarSudoku (gerador sudoku 0 0 200)
+  escolherDificuldade "3" = mostrarSudoku (gerador sudoku 0 0 100)
   escolherDificuldade _ = do {putStrLn "Opçao invalida, tente novamente!";
                               printaMenu}
