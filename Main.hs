@@ -62,10 +62,10 @@ module Main where
 
     if (linha == 0 && coluna == 0)
       then do
-        let (inteiro,matrizNova) = verificaDesistencia matriz 0 0 (retornaNumerosInChar numero)
+        let (inteiro,matrizNova) = verificaDesistencia matriz (-1) (-1) (retornaNumerosInChar numero)
         mostrarSudoku matrizNova
       else do
-        if ((verificaTotalModific matriz (linha - 1) (coluna - 1) (retornaNumerosInChar numero)) == 1) && ((retornaElemento matriz (0,0) (linha - 1) (coluna - 1)) == ' ') && (numero >= 1 && numero <= 9)
+        if ((verificaTotalModific matriz (linha - 1) (coluna - 1) (retornaNumerosInChar numero)) == 1) && ((retornaElemento matriz (0,0) ((linha - 1),(coluna - 1))) == ' ') && (numero >= 1 && numero <= 9)
           then do
             let (inteiro,matrizNova) = verificaDesistencia matriz (linha - 1) (coluna - 1) (retornaNumerosInChar numero)
             if (inteiro == 1)
@@ -78,5 +78,5 @@ module Main where
             escolheCoordenadas matriz
 
   verificaDesistencia :: [[Char]] -> Int -> Int -> Char -> (Int,[[Char]])
-  verificaDesistencia matriz 0 0 z = backTrackingResolution matriz (0,0) 1
+  verificaDesistencia matriz (-1) (-1) z = backTrackingResolution matriz (0,0) 1
   verificaDesistencia matriz x y z = (0,adicionaElementoPosicao matriz (0,0) (x,y) z)
