@@ -5,16 +5,15 @@ module Generator where
   import Data.Char
   import AlgoritmsOfVerification
   import BackTracking
-  import System.IO
 
   geradorChar :: Int -> Int -> Char
   geradorChar linha coluna = intToDigit (unsafePerformIO  (randomRIO (1,9)))
 
   geradorL :: Char -> Int
-  geradorL numero = unsafePerformIO  (randomRIO (1,9))
+  geradorL numero = unsafePerformIO  (randomRIO (0,8))
 
   geradorC :: Char -> Int
-  geradorC numero = unsafePerformIO  (randomRIO (1,9))
+  geradorC numero = unsafePerformIO  (randomRIO (0,8))
 
   gerador :: [[Char]] -> Int -> Int -> Int -> [[Char]]
   gerador sudoku linha coluna 0 = sudoku
