@@ -5,7 +5,12 @@ module AlgoritmsOfVerification where
   -- Retorna 0 se o caractere não pode ser inserido.
   verificaTotal :: [[Char]] -> Int -> Int -> Char -> Int
   verificaTotal matriz linha coluna caractere
-    | (selectColuna matriz 0 coluna caractere == 1) && (selectLinha matriz linha 0 caractere == 1) && (selectSetor matriz linha coluna caractere == 1) = 1
+    | (selectColuna matriz 0 coluna caractere == 1) && (selectLinha matriz linha coluna caractere == 1) && (selectSetor matriz linha coluna caractere == 1) = 1
+    | otherwise = 0
+
+  verificaTotalModific :: [[Char]] -> Int -> Int -> Char -> Int
+  verificaTotalModific matriz linha coluna caractere
+    | (((selectColuna matriz 0 coluna caractere) == 1) && ((selectLinhaModific matriz linha coluna caractere) == 1) && ((selectSetor matriz linha coluna caractere) == 1)) = 1
     | otherwise = 0
 
   retornaNumerosInChar :: Int -> Char
@@ -42,7 +47,7 @@ module AlgoritmsOfVerification where
   -- Retorna 1 se o caractere pode ser inserido na linha.
   -- Retorna 0 se o caractere não pode ser inserido na linha.
   selectLinha :: [[Char]] -> Int -> Int -> Char -> Int
-  selectLinha (head:[]) linha 8 caractere                   = verificaElementoLinha head 0 linha caractere
+  selectLinha (head:[]) linha coluna caractere                   = verificaElementoLinha head 0 linha caractere
   selectLinha (head:tail) linha coluna caractere
     | coluna > 8                                            = 1
     | ((verificaElementoLinha head 0 linha caractere) == 0) = 0
@@ -57,6 +62,18 @@ module AlgoritmsOfVerification where
     | ((iterator == linha) && (head == caractere))  = 0
     | ((iterator == linha) && (head /= caractere))  = 1
     | iterator < linha                              = verificaElementoLinha tail (iterator + 1) linha caractere
+
+  selectLinhaModific :: [[Char]] -> Int -> Int -> Char -> Int
+  selectLinhaModific (head:[]) linha c caractere   = verificaElementoLinhaModific head 0 linha caractere
+  selectLinhaModific (head:tail) linha c caractere
+    | (verificaElementoLinhaModific head 0 linha caractere) == 0 = 0
+    | otherwise                                                  = selectLinhaModific tail linha c caractere
+
+  verificaElementoLinhaModific :: [Char] -> Int -> Int -> Char -> Int
+  verificaElementoLinhaModific (head:tail) iterator linha caractere
+    | iterator < linha                             = verificaElementoLinhaModific tail (iterator + 1) linha caractere
+    | ((iterator == linha) && (head == caractere)) = 0
+    | otherwise                                    = 1
 
   -- Vincula o setor com as margens corretas e inicia a função que irá verificar o setor.
   selectSetor :: [[Char]] -> Int -> Int -> Char -> Int

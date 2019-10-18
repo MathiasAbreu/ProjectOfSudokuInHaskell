@@ -3,16 +3,16 @@ module BackTracking where
   import AuxiliaryFunctions
   import AlgoritmsOfVerification
 
-  testBackTracking :: [[Char]] -> IO()
-  testBackTracking matriz = mostrarSudoku(snd(backTrackingResolution matriz (0,0) 1))
+  executBackTracking :: [[Char]] -> IO()
+  executBackTracking matriz = mostrarSudoku(snd(backTrackingResolution matriz (0,0) 1))
 
   backTrackingResolution :: [[Char]] -> (Int,Int) -> Int -> (Int,[[Char]])
   backTrackingResolution matriz (x,y) 10              = (0,matriz)
   backTrackingResolution matriz (n,9) numero          = (1,matriz)
   backTrackingResolution matriz (linha,coluna) numero = if ((retornaElemento matriz (0,0) (linha,coluna)) == ' ')
-    then if ((verificaTotal matriz linha coluna (retornaNumerosInChar numero)) == 1)
+    then if ((verificaTotalModific matriz linha coluna (retornaNumerosInChar numero)) == 1)
       then verificaSudoku(backTrackingResolution (adicionaElementoPosicao matriz (0,0) (linha,coluna) (retornaNumerosInChar numero)) (proximaPosicao (linha,coluna)) 1) matriz (linha,coluna) numero
-      else (backTrackingResolution matriz (linha,coluna) (numero + 1)) --matriz (linha,coluna) numero
+      else (backTrackingResolution matriz (linha,coluna) (numero + 1)) --matriz (linha,coluna) (numero + 1)
     else backTrackingResolution matriz (proximaPosicao (linha,coluna)) 1
 
   -- Essa função funciona como restart.
