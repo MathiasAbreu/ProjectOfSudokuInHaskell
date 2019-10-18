@@ -65,7 +65,7 @@ module Main where
         let (inteiro,matrizNova) = verificaDesistencia matriz 0 0 (retornaNumerosInChar numero)
         mostrarSudoku matrizNova
       else do
-        if ((verificaTotalModific matriz (linha - 1) (coluna - 1) (retornaNumerosInChar numero)) == 1)
+        if ((verificaTotalModific matriz (linha - 1) (coluna - 1) (retornaNumerosInChar numero)) == 1) && ((retornaElemento matriz (0,0) (linha - 1) (coluna - 1)) == ' ') && (numero >= 1 && numero <= 9)
           then do
             let (inteiro,matrizNova) = verificaDesistencia matriz (linha - 1) (coluna - 1) (retornaNumerosInChar numero)
             if (inteiro == 1)
