@@ -42,10 +42,11 @@ module AlgoritmsOfVerification where
   -- Retorna 1 se o caractere pode ser inserido na linha.
   -- Retorna 0 se o caractere não pode ser inserido na linha.
   selectLinha :: [[Char]] -> Int -> Int -> Char -> Int
+  selectLinha matriz linha 9 caractere                      = 1
   selectLinha (head:tail) linha coluna caractere
     | (coluna + 1) > 9                                      = 1
     | ((verificaElementoLinha head 0 linha caractere) == 0) = 0
-    | otherwise                                             = selectLinha tail linha (coluna + 1) caractere
+    | ((verificaElementoLinha head 0 linha caractere) == 1) = selectLinha tail linha (coluna + 1) caractere
 
   -- Funcao Privada!
   -- Funcao Verificada! Percorre a coluna até encontrar o elemento correspondente da linha e verificar recursivamente se o caractere pode ser inserido ou não.

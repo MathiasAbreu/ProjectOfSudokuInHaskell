@@ -1,6 +1,5 @@
 module BackTracking where
 
-  import MethodsAuxiliars
   import AuxiliaryFunctions
   import AlgoritmsOfVerification
 
